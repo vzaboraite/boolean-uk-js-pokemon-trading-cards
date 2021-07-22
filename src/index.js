@@ -36,3 +36,56 @@
 //   - append to the element from Step 1.0
 // - input: an array of objects that represent pokemon (data)
 // - output: -
+
+// 1.0 bridge between index.js and index.html
+const cardsElem = document.querySelector(".cards");
+
+//  2.0
+function createPokemonCard(pokemon) {
+  const pokemonCardElem = document.createElement("li");
+  pokemonCardElem.setAttribute("class", "card");
+
+  const pokemonNameElem = document.createElement("h2");
+  pokemonNameElem.setAttribute("class", "card--title");
+  pokemonNameElem.innerText = pokemon.name;
+  pokemonCardElem.append(pokemonNameElem);
+
+  const imgElem = document.createElement("img");
+  const pokemonImage = pokemon.sprites.other["official-artwork"].front_default;
+  imgElem.setAttribute("class", "card--img");
+  imgElem.setAttribute("width", "256");
+  imgElem.setAttribute("src", pokemonImage);
+  pokemonCardElem.append(imgElem);
+
+  const pokemonStatsElem = createStatsList(pokemon.stats);
+  pokemonCardElem.append(pokemonStatsElem);
+
+  return pokemonCardElem;
+}
+
+// 2.1
+function createStatsList(stats) {
+  const cardTextElem = document.createElement("ul");
+  cardTextElem.setAttribute("class", "card--text");
+
+  for (let i = 0; i < stats.length; i++) {
+    const liElem = document.createElement("li");
+    const statName = stats[i].stat.name;
+    const baseStat = stats[i].base_stat;
+    liElem.innerText = `${statName}: ${baseStat}`;
+    cardTextElem.append(liElem);
+  }
+
+  return cardTextElem;
+}
+
+function renderPokemonCards(data) {
+  for (let i = 0; i < data.length; i++) {
+    const pokemon = data[i];
+
+    // append
+    cardsElem.append(createPokemonCard(pokemon));
+  }
+}
+
+renderPokemonCards(data);
