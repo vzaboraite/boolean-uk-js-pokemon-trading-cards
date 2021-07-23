@@ -45,12 +45,13 @@ function createPokemonCard(pokemon) {
   const pokemonCardElem = document.createElement("li");
   pokemonCardElem.setAttribute("class", "card");
 
-  /* TODO: 
-      - pokemonName should start wit capital letter
+  /* DONE: 
+      - pokemonName should start with capital letter
   */
   const pokemonNameElem = document.createElement("h2");
   pokemonNameElem.setAttribute("class", "card--title");
-  pokemonNameElem.innerText = pokemon.name;
+  pokemonNameElem.innerText =
+    pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
   pokemonCardElem.append(pokemonNameElem);
 
   const imgElem = document.createElement("img");
@@ -71,7 +72,7 @@ function createStatsList(stats) {
   const cardTextElem = document.createElement("ul");
   cardTextElem.setAttribute("class", "card--text");
 
-  /* TODO: 
+  /* DONE: 
       - statName should be uppercased
       - gaps between liElem
   */
@@ -79,7 +80,7 @@ function createStatsList(stats) {
     const liElem = document.createElement("li");
     const statName = stats[i].stat.name;
     const baseStat = stats[i].base_stat;
-    liElem.innerText = `${statName}: ${baseStat}`;
+    liElem.innerText = `${statName.toUpperCase()}: ${baseStat}`;
     cardTextElem.append(liElem);
   }
 
